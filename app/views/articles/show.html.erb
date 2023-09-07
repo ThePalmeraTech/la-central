@@ -1,0 +1,20 @@
+<h1>
+  <%= @article.title %>
+</h1>
+<p>
+  <%= @article.body %>
+</p>
+<p>
+  <%= link_to 'Editar', edit_article_path %> |
+  <%= link_to "Eliminar", article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %> |
+                  <%= link_to 'Volver', root_path %>
+</p>
+
+<hr>
+<%= render 'comments/comment' %>
+<hr>
+
+<%= render 'comments/form' %>
