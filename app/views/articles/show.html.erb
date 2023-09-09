@@ -4,6 +4,8 @@
 <p>
   <%= @article.body %>
 </p>
+<%= cl_image_tag @article.photo.key, height: 300, width: 400, crop: :fill %>
+
 <p>
   <%= link_to 'Editar', edit_article_path %> |
   <%= link_to "Eliminar", article_path(@article), data: {
