@@ -1,5 +1,9 @@
 <h1>Todos los artículos</h1>
 
+<!-- app/views/articles/index.html.erb -->
+<%= cl_image_tag("wwvryof9dfmpnjubaqvz",
+      width: 400, height: 300, crop: :fill) %>
+
 <ol>
   <% @articles.each do |article| %>
     <li><%= link_to article.title, article %></li>
