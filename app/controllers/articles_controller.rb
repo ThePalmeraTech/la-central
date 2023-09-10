@@ -13,6 +13,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    if params[:article][:photo].present?
+      uploaded_image = Cloudinary::Uploader.upload(params[:article][:photo])
+      #@article.photo = uploaded_image['public_id']
+    end
 
     if @article.save
       redirect_to @article
