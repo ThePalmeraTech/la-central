@@ -1,32 +1,49 @@
 <div class="container">
-  <h1>
-    <%= @article.title %>
-  </h1>
+    <h1>
+      <%= @article.title %>
+    </h1>
+    <span>
+      <%= @article.created_at %> |
+      <% if @article.category.present? %>
 
-  <% if @article.category.present? %>
+          Category: <b><%= @article.category.name %></b>
 
+      <% end %> |
+       <% if @article.user_id.present? %>
+        By: <b><%= @article.user.username %></b>
+      <%end%>
+
+    </span>
+    <div>
+      <!-- FIX THIS CODE WITH CLOUDINARY DISPLAYING IMAGES IN VIEWS
+      <%= cl_image_tag @article.photo.key, class:"photo"%>
+
+      TEMPORARILY WILL RUN FOLLOWING LINE AS PLACEHOLDER -->
+      <%= cl_image_tag("cld-sample-3",
+            width: 400, height: 300, crop: :fill) %>
+      <!-- <%= cl_image_tag @article.photo.key, class:"photo"%> -->
+    </div>
+
+
+  <p><%= @article.body %></p>
+
+    <hr>
+
+
+  <% if @article.user_id == current_user.id %>
     <p>
-      Category: <b><%= @article.category.name %></b>
+      <%= link_to 'Edit', edit_article_path %> |
+      <%= link_to "Delete", article_path(@article), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      } %> |
+
+  <% end %>
+   <%= link_to 'Go Back', root_path %>
     </p>
-  <% end %>%
 
-  <%= cl_image_tag @article.photo.key, class:"photo"%>
-
-  <p>
-    <%= @article.body %>
-  </p>
-
-  <p>
-    <%= link_to 'Edit', edit_article_path %> |
-    <%= link_to "Delete", article_path(@article), data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %> |
-                    <%= link_to 'Go Back', root_path %>
-  </p>
-
-  <hr>
   <%= render 'comments/comment' %>
+
 
   <%= render 'comments/form' %>
 </div>
