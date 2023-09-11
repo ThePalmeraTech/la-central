@@ -1,5 +1,7 @@
 <h2>Agregar comentario</h2>
-<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+
+<% if user_signed_in? %>
+  <%= form_with model: [ @article, @article.comments.build ] do |form| %>
   <p>
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
@@ -11,4 +13,8 @@
   <p>
     <%= form.submit %>
   </p>
+<% end %>
+  <% else %>
+    <p>You must <%= link_to "signup", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to leave a comment</p>
+
 <% end %>
