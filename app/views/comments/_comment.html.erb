@@ -9,11 +9,15 @@
     <strong>Comment:</strong>
     <%= comment.body %>
   </p>
+
+  <% if user_signed_in? && current_user.admin? %>
 <%= link_to "Delete Comment", [comment.article, comment], data: {
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %>
 
 
-  <hr>
+
+  <% end %>
+    <hr>
 <% end %>
