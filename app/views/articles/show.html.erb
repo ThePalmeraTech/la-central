@@ -2,7 +2,12 @@
   <%= @article.title %>
 </h1>
 
-<p>Category: <b><%= @article.category.name %></b></p>
+<% if @article.category.present? %>
+
+  <p>
+   Category: <b><%= @article.category.name %></b>
+  </p>
+<% end %>%
 
 <%= cl_image_tag @article.photo.key, class:"photo"%>
 
@@ -11,12 +16,12 @@
 </p>
 
 <p>
-  <%= link_to 'Editar', edit_article_path %> |
-  <%= link_to "Eliminar", article_path(@article), data: {
+  <%= link_to 'Edit', edit_article_path %> |
+  <%= link_to "Delete", article_path(@article), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %> |
-                  <%= link_to 'Volver', root_path %>
+                  <%= link_to 'Go Back', root_path %>
 </p>
 
 <hr>
