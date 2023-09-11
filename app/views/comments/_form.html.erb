@@ -4,7 +4,6 @@
   <%= form_with model: [ @article, @article.comments.build ] do |form| %>
 
   <p>
-    <%= form.label :body %><br>
     <%= form.text_area :body %>
     <!-- other form fields -->
   <%= form.hidden_field :user_id, value: current_user.id %>

@@ -2,24 +2,33 @@
     <h1>
       <%= @article.title %>
     </h1>
-  <% if @article.category.present? %>
-    <p>
-      Category: <b><%= @article.category.name %></b>
-    </p>
-  <% end %>
+    <span>
+      <%= @article.created_at %> |
+      <% if @article.category.present? %>
 
-  <p>Author: <b><%= @article.user.username %></b></p>
+          Category: <b><%= @article.category.name %></b>
 
+      <% end %> |
+       <% if @article.user_id.present? %>
+        By: <b><%= @article.user.username %></b>
+      <%end%>
 
-  <!-- FIX THIS CODE WITH CLOUDINARY DISPLAYING IMAGES IN VIEWS
+    </span>
+    <div>
+      <!-- FIX THIS CODE WITH CLOUDINARY DISPLAYING IMAGES IN VIEWS
       <%= cl_image_tag @article.photo.key, class:"photo"%>
 
       TEMPORARILY WILL RUN FOLLOWING LINE AS PLACEHOLDER -->
-  <%= cl_image_tag("cld-sample-3",
-        width: 400, height: 300, crop: :fill) %>
-  <!-- <%= cl_image_tag @article.photo.key, class:"photo"%> -->
+      <%= cl_image_tag("cld-sample-3",
+            width: 400, height: 300, crop: :fill) %>
+      <!-- <%= cl_image_tag @article.photo.key, class:"photo"%> -->
+    </div>
+
+
+  <p><%= @article.body %></p>
+
     <hr>
-    <%= render 'comments/comment' %>
+
 
   <% if @article.user_id == current_user.id %>
     <p>
@@ -28,11 +37,11 @@
                         turbo_method: :delete,
                         turbo_confirm: "Are you sure?"
                       } %> |
-                      <%= link_to 'Go Back', root_path %>
-    </p>
-  <% end %>
 
-  <hr>
+  <% end %>
+   <%= link_to 'Go Back', root_path %>
+    </p>
+
   <%= render 'comments/comment' %>
 
 
