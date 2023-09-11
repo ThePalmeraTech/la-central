@@ -1,6 +1,7 @@
-<h1>
-  <%= @article.title %>
-</h1>
+<div class="container">
+  <h1>
+    <%= @article.title %>
+  </h1>
 
 <% if @article.category.present? %>
   <p>
@@ -12,12 +13,12 @@
 
 
 <!-- FIX THIS CODE WITH CLOUDINARY DISPLAYING IMAGES IN VIEWS
-    <%= cl_image_tag @article.photo.key, class:"photo"%>
+    <%= cl_image_tag @article.photo.key, class:"photo"%> -->
 
-    TEMPORARILY WILL RUN FOLLOWING LINE AS PLACEHOLDER -->
+  <!--  TEMPORARILY WILL RUN FOLLOWING LINE AS PLACEHOLDER
 <%= cl_image_tag("cld-sample-3",
       width: 400, height: 300, crop: :fill) %>
-<!-- <%= cl_image_tag @article.photo.key, class:"photo"%> -->
+<%= cl_image_tag @article.photo.key, class:"photo"%> -->
 
 <p>
   <%= @article.body %>
@@ -34,8 +35,17 @@
   </p>
 <% end %>
 
-<hr>
-<%= render 'comments/comment' %>
+  <p>
+    <%= link_to 'Edit', edit_article_path %> |
+    <%= link_to "Delete", article_path(@article), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %> |
+                    <%= link_to 'Go Back', root_path %>
+  </p>
 
+  <hr>
+  <%= render 'comments/comment' %>
 
-<%= render 'comments/form' %>
+  <%= render 'comments/form' %>
+</div>

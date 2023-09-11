@@ -1,19 +1,22 @@
-<h1>Todos los artículos</h1>
-<% if user_signed_in? %>
-  <p>Hi <b><%= current_user.username %></b>, you're registered as  <b><%= current_user.role %></b> in La Central</p>
-  <%= link_to "Log Out", destroy_user_session_path, 'data-turbo-method': :delete %>
-<% end %>
-
-<!-- app/views/articles/index.html.erb -->
-<%= cl_image_tag("wwvryof9dfmpnjubaqvz",
-      width: 400, height: 300, crop: :fill) %>
-
-<ol>
-  <% @articles.each do |article| %>
-    <li><%= link_to article.title, article %></li>
+<div class="container">
+  <h1>Todos los artículos</h1>
+  <% if user_signed_in? %>
+    <p>Hi <b><%= current_user.username %></b>, you're registered as  <b><%= current_user.role %></b> in our system</p>
+    <%= link_to "Log Out", destroy_user_session_path, 'data-turbo-method': :delete %>
   <% end %>
-</ol>
 
-<% if user_signed_in? && current_user.publisher? %>
-  <%= link_to "Add Article", new_article_path %>
-<% end %>
+  <!-- app/views/articles/index.html.erb -->
+  <%= cl_image_tag("wwvryof9dfmpnjubaqvz",
+        width: 400, height: 300, crop: :fill) %>
+
+  <ol>
+    <% @articles.each do |article| %>
+      <li><%= link_to article.title, article %></li>
+    <% end %>
+  </ol>
+
+  <% if user_signed_in? && current_user.publisher? %>
+    <%= link_to "Add Article", new_article_path %>
+  <% end %>
+
+</div>
