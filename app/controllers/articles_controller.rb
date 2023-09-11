@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     if params[:article][:photo].present?
       uploaded_image = Cloudinary::Uploader.upload(params[:article][:photo])
-      #@article.photo = uploaded_image['public_id']
+      @article.photo.key = uploaded_image['public_id']
     end
 
     if @article.save
@@ -48,6 +48,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :category_id)
   end
 end

@@ -1,17 +1,19 @@
 <h1>New Article</h1>
-<%= form_with model: @article do |form| %>
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+ <%= simple_form_for(@article) do |f| %>
+  <!-- [...] -->
+   <%= f.text_field :title %>
   </div>
   <div>
-  <%= form.file_field :photo %>
+  <%= f.file_field :photo, as: :file %>
   </div>
   <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
+    <%= f.label :category_id %>
+    <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }) %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= f.text_area :body %>
   </div>
- <% end %>
+  <div>
+    <%= f.submit %>
+  <!-- [...] -->
+<% end %>
