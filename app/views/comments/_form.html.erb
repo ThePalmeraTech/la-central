@@ -1,14 +1,13 @@
-<h2>Agregar comentario</h2>
+<h3>Agregar comentario</h3>
 
 <% if user_signed_in? %>
   <%= form_with model: [ @article, @article.comments.build ] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
+
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
+    <!-- other form fields -->
+  <%= form.hidden_field :user_id, value: current_user.id %>
   </p>
   <p>
     <%= form.submit %>

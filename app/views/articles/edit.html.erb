@@ -1,6 +1,7 @@
 <h1>Edit Article</h1>
  <%= simple_form_for(@article) do |f| %>
   <!-- [...] -->
+  <div>
    <%= f.text_field :title %>
   </div>
   <div>
@@ -15,6 +16,7 @@
   </div>
   <div>
     <%= f.submit %>
+  </div>
   <!-- [...] -->
 <% end %>
 

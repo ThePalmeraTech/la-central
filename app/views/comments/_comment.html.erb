@@ -1,13 +1,11 @@
 <h2>Comments</h2>
 <% @article.comments.each do |comment| %>
   <p>
-    <strong>User:</strong>
-    <%= comment.commenter %>
+    <strong><%= comment.user.username %></strong> says:</p>
   </p>
 
   <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
+   <i> <%= comment.body %></i>
   </p>
 
   <% if user_signed_in? && current_user.admin? %>

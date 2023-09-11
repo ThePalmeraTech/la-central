@@ -23,14 +23,16 @@
   <%= @article.body %>
 </p>
 
-<p>
-  <%= link_to 'Edit', edit_article_path %> |
-  <%= link_to "Delete", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %> |
-                  <%= link_to 'Go Back', root_path %>
-</p>
+<% if @article.user_id == current_user.id %>
+  <p>
+    <%= link_to 'Edit', edit_article_path %> |
+    <%= link_to "Delete", article_path(@article), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %> |
+                    <%= link_to 'Go Back', root_path %>
+  </p>
+<% end %>
 
 <hr>
 <%= render 'comments/comment' %>
