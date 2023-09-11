@@ -7,6 +7,10 @@
   <%= f.file_field :photo, as: :file %>
   </div>
   <div>
+    <%= f.label :category_id %>
+    <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }) %>
+  </div>
+  <div>
     <%= f.text_area :body %>
   </div>
   <div>
