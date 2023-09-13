@@ -27,7 +27,7 @@
     <hr>
 
 
-  <% if @article.user_id == current_user %>
+  <% if @article.user_id == current_user.id %>
     <p>
       <%= link_to 'Edit', edit_article_path %> |
       <%= link_to "Delete", article_path(@article), data: {
