@@ -13,7 +13,8 @@
       <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }) %>
     </div>
     <div>
-      <%= f.text_area :body %>
+      <%= f.label :body %>
+      <%= f.rich_text_area :body %>
     </div>
     <div>
       <%= f.submit %>
