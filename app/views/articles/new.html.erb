@@ -13,9 +13,8 @@
       <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }) %>
     </div>
     <div>
-      <%= f.text_area :body %>
-      <!-- other form fields -->
-    <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= form.label :content %>
+      <%= form.rich_text_area :content %>
     </div>
     <div>
       <%= f.submit %>
