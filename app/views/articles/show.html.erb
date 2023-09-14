@@ -27,7 +27,7 @@
     <hr>
 
 
-  <% if @article.user_id != current_user || current_user.role != 'admin' %>
+  <% if @article.user_id =! current_user || current_user.role =! 'admin' %>
     <p>
       <%= link_to 'Go Back', root_path %>
       </p>
@@ -36,13 +36,12 @@
       <%= link_to "Delete", article_path(@article), data: {
                         turbo_method: :delete,
                         turbo_confirm: "Are you sure?"
-                      } %> |
+                      } %>  
   <% end %>
 
     </p>
 
   <%= render 'comments/comment' %>
-
 
   <%= render 'comments/form' %>
 </div>
