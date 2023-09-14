@@ -1,45 +1,46 @@
-<section id="about">
+<section>
 <div class="container">
-  <h1>Fully responsive navigation</h1>
-  <p>Mobile hamburger menu with css3 animations, animated links on hover, hide navigation on scroll down / show on scroll up (<a href="https://medium.com/@mariusc23/hide-header-on-scroll-down-show-on-scroll-up-67bbaae9a78c#.xnr8amvlw">credit to Marius Craciunoiu</a>)</p>
-  <p class="signature">Made with ♥ by <a href="http://www.palmeratech.com/"> Hanaley Mosleygit </a></p>
+  <h2>Aborígenes</h2>
+  <p>Comarcas aborígenes del istmo</p>
+  <p class="signature">Made with ♥ by <a href="http://www.palmeratech.com/"> Hanaley Mosley </a></p>
+
+   <div class="row">
+    <div class="col-4">
+       <% @articles.last(3).reverse.each do |article| %>
+        <div class="horizontal-card mb-2">
+         <div class="row">
+            <% if article.photo.present? %>
+              <div class="col-lg-4">
+                <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+              </div>
+            <% else %>
+            <div class="col-lg-4">
+              <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+              </div>
+              </div>
+            <% end %>
+
+            <div class="col-lg-8 p-3">
+              <h5><%= link_to article.title, article %></h5>
+              <p class="article-data"><%= article.created_at %> | <%= article.user.username %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+          <% if user_signed_in? && current_user.publisher? %>
+          <%= link_to "Add Article", new_article_path, class:'btn btn-primary btn-sm' %>
+          <% end %>
+      </div>
+
+    </div>
+
   </div>
+
+      </div>
+
+
+
+
+
 </section>
-
-<section id="exp">
-  <div class="container">
-  <h1>Resume</h1></div>
-</section>
-
-<section id="skills">
-  <div class="container">
-  <h1>skills</h1></div>
-</section>
-
-<section id="projects">
-  <div class="container">
-  <h1>projects</h1></div>
-</section>
-
-<section id="contact">
-  <div class="container">
-  <h1>contact</h1></div>
-</section>
-
-<div class="container">
-  <h1>Todos los artículos</h1>
-  <% if user_signed_in? %>
-    <p>Hi <b><%= current_user.username %></b>, you're registered as  <b><%= current_user.role %></b> in La Central</p>
-  <% end %>
-
-  <ol>
-    <% @articles.each do |article| %>
-      <li><%= link_to article.title, article %></li>
-    <% end %>
-  </ol>
-
-  <% if user_signed_in? && current_user.publisher? %>
-    <%= link_to "Add Article", new_article_path %>
-  <% end %>
-
-</div>

@@ -1,0 +1,30 @@
+.horizontal-card {
+  //background-color: "fbfbfbfb";
+  box-shadow: 0px 1px 4px #ccc;
+  border-radius: 3px;
+   .image {
+      width: 100%;
+      height: 100px;
+      background-size:cover;
+      background-position: center;
+      background-repeat: no-repeat;
+   }
+   .article-data {
+    font-size: 12px;
+   }
+}
+
+.horizontal-card:hover {
+  //background-color: "fbfbfbfb";
+  box-shadow: 0px 1px 14px #ccc;
+   .image {
+      width: 100%;
+      height: 100px;
+      background-size:cover;
+      background-position: center;
+      background-repeat: no-repeat;
+   }
+   .article-data {
+    font-size: 12px;
+   }
+}

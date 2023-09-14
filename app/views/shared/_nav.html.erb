@@ -3,16 +3,22 @@
           <nav id="navigation">
             <a href="#" class="logo">La Central</a>
             <a aria-label="mobile menu" class="nav-toggle">
-              <span></span>
-              <span></span>
-              <span></span>
+              <span><%= link_to "Home", root_path %> | </span>
+                <span><%= link_to "Sign Up", new_user_registration_path %> | </span>
+                <span><%= link_to "Sign In", new_user_session_path %>  </span>
+                <% if user_signed_in? %>
+                  <span>Hi <b><%= current_user.username %></b>, you're registered as  <b><%= current_user.role %></b> in La Central</li>
+                <% end %>
             </a>
               <ul class="menu-left">
                 <li><%= link_to "Home", root_path %> | </li>
                 <li><%= link_to "Sign Up", new_user_registration_path %> | </li>
                 <li><%= link_to "Sign In", new_user_session_path %>  </li>
+                <% if user_signed_in? %>
+                  <li>Hi <b><%= current_user.username %></b>, you're registered as  <b><%= current_user.role %></b> in La Central</li>
+                <% end %>
               </ul>
+
           </nav>
         </div>
       </header>
-
