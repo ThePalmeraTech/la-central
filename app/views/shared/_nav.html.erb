@@ -1,12 +1,18 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <ul class="nav nav-pills">
-        <li><%= link_to "Home", root_path %> | </li>
-        <li><%= link_to "Sign Up", new_user_registration_path %> | </li>
-        <li><%= link_to "Sign In", new_user_session_path %> | </li>
-        <%if user_signed_in? %><li><%= link_to "Log Out", destroy_user_session_path, 'data-turbo-method': :delete %></li><%end%>
-      </ul>
-    </div>
-  </div>
-</div>
+<header>
+        <div class="container">
+          <nav id="navigation">
+            <a href="#" class="logo">La Central</a>
+            <a aria-label="mobile menu" class="nav-toggle">
+              <span><%= link_to "Home", root_path %> | </span>
+                <span><%= link_to "Sign Up", new_user_registration_path %> | </span>
+                <span><%= link_to "Sign In |", new_user_session_path %>  </span>
+                <% if user_signed_in? %>
+                <span><%= link_to 'Sign out - ', destroy_user_session_path, data: { turbo_method: :delete } %></span>
+
+                  <span><h6>Hi <b><%= current_user.username %></b>, you're registered as <b><%= current_user.role %></b> in La Central</h6></span>
+                <% end %>
+            </a>
+
+          </nav>
+        </div>
+      </header>

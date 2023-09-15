@@ -1,1 +1,29 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import "pages/index";
+@import "components/index";
+
+* {
+  box-sizing: border-box;
+}
+body {
+  padding: 50px;
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+section {
+  height: 100vh;
+  &#about {
+    text-align: justify;
+  }
+  h1 {
+    text-align: justify;
+  }
+}
