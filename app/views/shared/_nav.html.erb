@@ -1,17 +1,30 @@
-<header>
-        <div class="container">
+<header style="box-shadow: 0px 11px 7px #9393931f;;">
+        <div class="container-fluid">
           <nav id="navigation">
-            <a href="#" class="logo">La Central</a>
-            <a aria-label="mobile menu" class="nav-toggle">
-              <span><%= link_to "Home", root_path %> | </span>
-                <span><%= link_to "Sign Up", new_user_registration_path %> | </span>
-                <span><%= link_to "Sign In |", new_user_session_path %>  </span>
-                <% if user_signed_in? %>
-                <span><%= link_to 'Sign out - ', destroy_user_session_path, data: { turbo_method: :delete } %></span>
 
-                  <span><h6>Hi <b><%= current_user.username %></b>, you're registered as <b><%= current_user.role %></b> in La Central</h6></span>
-                <% end %>
-            </a>
+              <div class="row">
+                  <div class="col-lg-3">
+                    <a href="/" class="logo">La Central</a>
+                  </div>
+
+                  <div class="col-lg-1 mt-4">
+                    <%= link_to "Home", root_path %>
+                  </div>
+
+                  <div class="col-lg-1 mt-4">
+                    <%= link_to "Sign Up", new_user_registration_path %>
+                  </div>
+
+                  <div class="col-lg-1 mt-4">
+                    <%= link_to "Sign In", new_user_session_path %>
+                  </div>
+
+                  <% if user_signed_in? %>
+                    <div class="col-lg-2 mt-4"><%= link_to 'Sign out - ', destroy_user_session_path, data: { turbo_method: :delete } %></div>
+                    <div class="col-lg-4 mt-4 text-end"><h6>Hi <b><%= current_user.username %></b>, you're registered as <b><%= current_user.role %></b> in La Central</h6></div>
+                  <% end %>
+              </div>
+
 
           </nav>
         </div>

@@ -1,45 +1,111 @@
+<section style="background:url('https://space.jhuapl.edu/sites/space.jhuapl.edu/files/2023-01/2023-102_AAS_Webb_LHS475b_Illustration_View1.png');
+ background-size:cover; max-height: 68vh; margin-top:-2vh; color:#f1f1f1">
+ </section>
+
 <section>
-<div class="container">
-  <h2>Aborígenes</h2>
-  <p>Comarcas aborígenes del istmo</p>
-  <p class="signature">Made with ♥ by <a href="http://www.palmeratech.com/"> Hanaley Mosley </a></p>
+  <div class="container-fluid pt-5">
+    <h2>Aborígenes</h2>
+    <p>Comarcas aborígenes del istmo</p>
+    <p class="signature">Made with ♥ by <a href="http://www.palmeratech.com/"> Hanaley Mosley </a></p>
 
-   <div class="row">
-    <div class="col-4">
-       <% @articles.last(3).reverse.each do |article| %>
-       <%= link_to article do %>
-        <div class="horizontal-card mb-2">
-         <div class="row">
-            <% if article.photo.present? %>
-              <div class="col-lg-4">
-                <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+    <div class="row">
+      <div class="col-lg-3">
+        <% @articles.last(3).reverse.each do |article| %>
+          <%= link_to article do %>
+            <div class="horizontal-card mb-2">
+            <div class="row">
+                <% if article.photo.present? %>
+                  <div class="col-lg-4">
+                    <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                  </div>
+                <% else %>
+                <div class="col-lg-4">
+                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                  </div>
+                  </div>
+                <% end %>
+
+                <div class="col-lg-8 p-3">
+                  <h5><%= article.title %></h5>
+                  <p class="article-data"><%= article.created_at %> | <%= article.user.username %></p>
+                </div>
               </div>
-            <% else %>
-            <div class="col-lg-4">
-              <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
-              </div>
-              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="row">
+            <% if user_signed_in? && current_user.publisher? %>
+            <%= link_to "Add Article", new_article_path, class:'btn btn-primary btn-sm' %>
             <% end %>
+        </div>
 
-            <div class="col-lg-8 p-3">
-              <h5><%= article.title %></h5>
-              <p class="article-data"><%= article.created_at %> | <%= article.user.username %></p>
+      </div>
+
+      <div class="col-lg-3">
+       <% @articles.where(category_id: Category.find_by(name: "Ukraine")).order(created_at: :desc).each do |article| %>
+        <%= link_to article do %>
+          <div class="horizontal-card mb-2">
+            <div class="row">
+              <% if article.photo.present? %>
+                <div class="col-lg-4">
+                  <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                </div>
+              <% else %>
+                <div class="col-lg-4">
+                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');"></div>
+                </div>
+              <% end %>
+
+              <div class="col-lg-8 p-3">
+                <h5><%= article.title %></h5>
+                <p class="article-data">
+                  <%= article.created_at %>
+                  <% if article.user.present? %>
+                    | <%= article.user.username %>
+                  <% end %>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
         <% end %>
       <% end %>
-      <div class="row">
-          <% if user_signed_in? && current_user.publisher? %>
-          <%= link_to "Add Article", new_article_path, class:'btn btn-primary btn-sm' %>
-          <% end %>
+
       </div>
+
+      <div class="col-lg-3">
+       <% @articles.where(category_id: Category.find_by(name: 'Romance')).order(created_at: :desc).each do |article| %>
+        <%= link_to article do %>
+          <div class="horizontal-card mb-2">
+            <div class="row">
+              <% if article.photo.present? %>
+                <div class="col-lg-4">
+                  <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                </div>
+              <% else %>
+                <div class="col-lg-4">
+                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');"></div>
+                </div>
+              <% end %>
+
+              <div class="col-lg-8 p-3">
+                <h5><%= article.title %></h5>
+                <p class="article-data">
+                  <%= article.created_at %>
+                  <% if article.user.present? %>
+                    | <%= article.user.username %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      </div>
+
+
 
     </div>
 
   </div>
-
-      </div>
-
-
 </section>

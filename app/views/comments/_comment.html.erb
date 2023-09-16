@@ -8,11 +8,10 @@
    <i> <%= comment.body %></i>
   </p>
 
-    <% if comment.user == current_user || current_user.admin? %>
-      <%= link_to "Delete Comment", [comment.article, comment], method: :delete, data: {
-                turbo_confirm: "Are you sure?"
-              } %>
-    <% end %>
+    <% if current_user && current_user.respond_to?(:admin?) && (comment.user == current_user || current_user.admin?) %>
+  <%= link_to "Delete Comment", [comment.article, comment], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<% end %>
+
 
 
 <% end %>
