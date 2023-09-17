@@ -1,18 +1,21 @@
-<h3>Agregar comentario</h3>
+<div style="padding-left:7vh; padding-right:7vh; background:f1f1f1; border-radius:4px";>
+  <h3>Agregar comentario</h3>
 
-<% if user_signed_in? %>
-  <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <% if user_signed_in? %>
+    <%= form_with model: [ @article, @article.comments.build ] do |form| %>
 
-  <p>
-    <%= form.text_area :body %>
-    <!-- other form fields -->
-  <%= form.hidden_field :user_id, value: current_user.id %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+    <p>
+      <%= form.text_area :body %>
+          <!-- other form fields -->
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        </p>
+        <p>
+          <%= form.submit %>
+        </p>
+      <% end %>
+
   <% else %>
     <p>You must <%= link_to "signup", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to leave a comment</p>
 
-<% end %>
+  <% end %>
+</div>

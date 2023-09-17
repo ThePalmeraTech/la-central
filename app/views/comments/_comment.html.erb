@@ -1,17 +1,19 @@
-<h2>Comments</h2>
-<% @article.comments.each do |comment| %>
-  <p>
-    <strong><%= comment.user.username %></strong> says:</p>
-  </p>
+<div style="padding-left:3vh; padding-right:3vh">
+  <h2>Comments</h2>
+  <% @article.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.username %></strong> says:</p>
+    </p>
 
-  <p>
-   <i> <%= comment.body %></i>
-  </p>
+    <p>
+      <i> <%= comment.body %></i>
+    </p>
 
-    <% if current_user && current_user.respond_to?(:admin?) && (comment.user == current_user || current_user.admin?) %>
-  <%= link_to "Delete Comment", [comment.article, comment], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
+      <% if current_user && current_user.respond_to?(:admin?) && (comment.user == current_user || current_user.admin?) %>
+        <%= link_to "Delete Comment", [comment.article, comment], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+      <% end %>
 
 
 
-<% end %>
+  <% end %>
+</div>

@@ -71,13 +71,12 @@ header {
   -webkit-transform: translateY(0);
   nav {
     .logo {
-      float: left;
       padding-top: .25rem;
       padding-bottom: .25rem;
-      margin-right: 1rem;
-      font-size: 2.5em;
+      font-size: 2em;
+      font-family: Comfortaa, cursive;
       font-weight: bold;
-      line-height: inherit;
+      line-height: 2;
       font-weight: 500;
       color: black;
       &:after {

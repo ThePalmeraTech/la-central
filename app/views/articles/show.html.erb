@@ -1,172 +1,188 @@
-<div class="container-fluid">
-   <div class="row">
+<section>
+    <div class="container-fluid">
+      <div class="row">
 
-      <div class="col-lg-3">
-      <h3>Latest</h3>
-            <% @articles.last(7).reverse.each do |article| %>
-            <%= link_to article do %>
-              <div class="horizontal-card mb-2">
-                <div class="row">
-                  <% if article.photo.present? %>
-                    <div class="col-lg-5">
-                      <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
-                    </div>
-                  <% else %>
-                    <div class="col-lg-5">
-                      <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+      <center>
+        <img src="https://res.cloudinary.com/do5uz4iro/image/upload/v1694906628/ad-space-00_pwf8ph.jpg" class="img-fluid" alt="">
+      </center>
+
+          <!-- div class="col-lg-3">
+          <h3>Latest</h3>
+                <% @articles.last(7).reverse.each do |article| %>
+                <%= link_to article do %>
+                  <div class="horizontal-card mb-2">
+                    <div class="row">
+                      <% if article.photo.present? %>
+                        <div class="col-lg-5">
+                          <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                        </div>
+                      <% else %>
+                        <div class="col-lg-5">
+                          <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                          </div>
+                        </div>
+                      <% end %>
+
+                      <div class="col-lg-7 p-3">
+                        <h6 style="font-size:16px"><%= article.title %></h6>
+
                       </div>
                     </div>
-                  <% end %>
-
-                  <div class="col-lg-7 p-3">
-                    <h6 style="font-size:16px"><%= article.title %></h6>
-
                   </div>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-      </div>
-
-      <div class="col-lg-6">
-         <h1><%= @article.title %>
-         </h1>
-          <span>
-            <%= @article.created_at %> |
-            <% if @article.category.present? %>
-
-                Category: <b><%= @article.category.name %></b>
-
-            <% end %> |
-            <% if @article.user_id.present? %>
-              By: <b><%= @article.user.username %></b>
-            <%end%>
-          </span>
-
-            <div>
-              <!-- FIX THIS CODE WITH CLOUDINARY DISPLAYING IMAGES IN VIEWS-->
-              <% if @article.photo.present? %>
-                <%= cl_image_tag @article.photo.key, class:"img-fluid"%>
+                <% end %>
               <% end %>
-            </div>
+          </div -->
+          <div class="col-lg-8">
+            <h1 class="mt-5 mb-5">
+                  <%= @article.title %>
+              </h1>
+          </div>
+          <div class="col-lg-4">
 
-          <div class="trix-content">
-            <%= @article.body %>
-            </div>
+          </div>
+          <div class="col-lg-9">
+
+              <span>
+                <%= @article.created_at %> |
+                <% if @article.category.present? %>
+                    Category: <b><%= @article.category.name %></b>
+                <% end %> |
+                <% if @article.user_id.present? %>
+                  By: <b><%= @article.user.username %></b>
+                <%end%>
+              </span>
+
+                <div style="padding-left:7vh; padding-right:7vh">
+                  <!-- FIX THIS CODE WITH CLOUDINARY DISPLAYING IMAGES IN VIEWS-->
+                  <% if @article.photo.present? %>
+                    <%= cl_image_tag @article.photo.key, class:"img-fluid"%>
+                  <% end %>
+                </div>
+
+              <div style="padding-left:7vh; padding-right:7vh"class="trix-content">
+                <%= @article.body %>
+                </div>
+
+
+
+              <div  style="padding-left:7vh; padding-right:7vh">
+                <% if user_signed_in? && (@article.user == current_user || current_user.role == 'admin') %>
+                  <%= link_to 'Edit', edit_article_path(@article) %> |
+                  <%= link_to "Delete", article_path(@article), data: { confirm: 'Are you sure?', method: :delete } %>
+                <% else %>
+                <p>
+                  <%= link_to 'Go Back', root_path %>
+                </p>
+
+              </div>
+      <!-- Display something else or nothing when the condition is not met -->
+
+    <% end %>
+<hr style="padding-left:7vh; padding-right:7vh">
+
+              <%= render 'comments/comment' %>
+
+              <%= render 'comments/form' %>
+          </div>
+          </div>
+
+    <div class="col-lg-3">
+          <h5>Top 10 of Most Read Articles</h5>
+                <% @articles.last(7).each do |article| %>
+                <%= link_to article do %>
+                  <div class="horizontal-card mb-2">
+                    <div class="row">
+                      <% if article.photo.present? %>
+                        <div class="col-lg-5">
+                          <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                        </div>
+                      <% else %>
+                        <div class="col-lg-5">
+                          <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                          </div>
+                        </div>
+                      <% end %>
+
+                      <div class="col-lg-7 p-3">
+                        <h6 style="font-size:16px"><%= article.title %></h6>
+
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
 
             <hr>
 
-          <% if user_signed_in? && (@article.user == current_user || current_user.role.present? || current_user.role == 'admin') %>
-  <%= link_to 'Edit', edit_article_path(@article) %> |
-  <%= link_to "Delete", article_path(@article), data: { confirm: 'Are you sure?', method: :delete } %>
-<% else %>
-<p>
-            <%= link_to 'Go Back', root_path %>
-          </p>
-  <!-- Display something else or nothing when the condition is not met -->
-<% end %>
-
-
-          <%= render 'comments/comment' %>
-
-          <%= render 'comments/form' %>
-      </div>
-
- <div class="col-lg-3">
-      <h3>Top 10 of Most Read Articles</h3>
+            <div class="row">
             <% @articles.last(7).each do |article| %>
-            <%= link_to article do %>
-              <div class="horizontal-card mb-2">
-                <div class="row">
-                  <% if article.photo.present? %>
-                    <div class="col-lg-5">
-                      <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
-                    </div>
-                  <% else %>
-                    <div class="col-lg-5">
-                      <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
-                      </div>
-                    </div>
-                  <% end %>
+                    <%= link_to article do %>
 
-                  <div class="col-lg-7 p-3">
-                    <h6 style="font-size:16px"><%= article.title %></h6>
+                        <div class="col-lg-6">
+                          <div class="horizontal-card mb-2">
+                            <div class="row">
+                              <% if article.photo.present? %>
+                                <div class="col-lg-12">
+                                  <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                                </div>
+                              <% else %>
+                                <div class="col-lg-12">
+                                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                                  </div>
+                                </div>
+                              <% end %>
 
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-
-         <hr>
-
-        <div class="row">
-         <% @articles.last(7).each do |article| %>
-                <%= link_to article do %>
-
-                    <div class="col-lg-6">
-                      <div class="horizontal-card mb-2">
-                        <div class="row">
-                          <% if article.photo.present? %>
-                            <div class="col-lg-12">
-                              <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
-                            </div>
-                          <% else %>
-                            <div class="col-lg-12">
-                              <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                              <div class="col-lg-12 p-3">
+                                <h6 style="font-size:12px">
+                                  <%= article.title %>
+                                </h6>
                               </div>
-                            </div>
-                          <% end %>
-
-                          <div class="col-lg-12 p-3">
-                            <h6 style="font-size:12px">
-                              <%= article.title %>
-                            </h6>
                           </div>
+                    </div>
                       </div>
-                 </div>
-                  </div>
+                    <% end %>
+
                 <% end %>
 
-            <% end %>
+            </div>
+    <!--           <div class="row">
+                  <% @articles.last(7).each do |article| %>
+                    <%= link_to article do %>
 
-        </div>
-<!--           <div class="row">
-              <% @articles.last(7).each do |article| %>
-                <%= link_to article do %>
+                        <div class="col-lg-4">
+                          <div class="horizontal-card mb-2">
+                            <div class="row">
+                              <% if article.photo.present? %>
+                                <div class="col-lg-12">
+                                  <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                                </div>
+                              <% else %>
+                                <div class="col-lg-12">
+                                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                                  </div>
+                                </div>
+                              <% end %>
 
-                    <div class="col-lg-4">
-                      <div class="horizontal-card mb-2">
-                        <div class="row">
-                          <% if article.photo.present? %>
-                            <div class="col-lg-12">
-                              <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
-                            </div>
-                          <% else %>
-                            <div class="col-lg-12">
-                              <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                              <div class="col-lg-12 p-3">
+                                <h6 style="font-size:12px">
+                                  <%= article.title %>
+                                </h6>
                               </div>
-                            </div>
-                          <% end %>
-
-                          <div class="col-lg-12 p-3">
-                            <h6 style="font-size:12px">
-                              <%= article.title %>
-                            </h6>
                           </div>
+                    </div>
                       </div>
-                 </div>
-                  </div>
+                    <% end %>
+
                 <% end %>
 
-            <% end %>
 
 
 
-
-      </div> -->
-
+          </div> -->
 
 
-   </div>
-</div>
+
+      </div>
+    </div>
+
+</section>
