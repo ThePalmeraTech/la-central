@@ -68,7 +68,10 @@
               <div  style="padding-left:7vh; padding-right:7vh">
                 <% if user_signed_in? && (@article.user == current_user || current_user.role == 'admin') %>
                   <%= link_to 'Edit', edit_article_path(@article) %> |
-                  <%= link_to "Delete", article_path(@article), data: { confirm: 'Are you sure?', method: :delete } %>
+                  <%= link_to "Delete article", article_path(@article), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
                 <% else %>
                 <p>
                   <%= link_to 'Go Back', root_path %>
