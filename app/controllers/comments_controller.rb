@@ -8,8 +8,14 @@ class CommentsController < ApplicationController
   def destroy
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
-    @comment.destroy
-    redirect_to article_path(@article)
+
+    if current_user_can_delete_comment?(@comment)
+      @comment.destroy
+      redirect_to article_path(@article)
+    else
+      flash[:alert] = "You don't have permission to delete this comment."
+      redirect_to article_path(@article)
+    end
   end
 
   private
@@ -17,4 +23,9 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:user_id, :body)
   end
+
+  def current_user_can_delete_comment?(comment)
+    current_user == comment.user || current_user.admin?
+  end
+
 end
