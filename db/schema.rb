@@ -53,9 +53,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_175448) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
     t.integer "category_id"
     t.integer "user_id"
-    t.string "photo"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
