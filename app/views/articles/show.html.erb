@@ -62,8 +62,18 @@
               <div style="padding-left:7vh; padding-right:7vh"class="trix-content">
                 <%= @article.body %>
                 </div>
+              <% if @article.images.present? %>
+               <div class="content">
+                <% @article.images.each do |image| %>
 
+                  <a class="elem" target="_blank" href="<%= cl_image_path(image.key, { width: 800, height: 600, crop: :fill }) %>" title="image 1" data-lcl-txt="lorem ipsum dolor sit amet" data-lcl-author="someone" data-lcl-thumb="<%= cl_image_path(image.key, { width: 200, height: 150, crop: :fill }) %>">
+                  <span style="background-image: url('<%= cl_image_path(image.key, { width: 800, height: 600, crop: :fill }) %>');"></span>
+                </a>
 
+                <% end %>
+                  <br/><br/>
+                </div>
+              <% end %>
 
               <div  style="padding-left:7vh; padding-right:7vh">
                 <% if user_signed_in? && (@article.user == current_user || current_user.role == 'admin') %>

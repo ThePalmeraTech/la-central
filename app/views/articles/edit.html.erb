@@ -1,21 +1,30 @@
 <div class="container">
   <h1>Edit Article</h1>
-  <%= simple_form_for(@article) do |f| %>
+ <%= simple_form_for(@article, html: { multipart: true }) do |f| %>
     <!-- [...] -->
     <div>
       <%= f.text_field :title %>
     </div>
+
     <div>
       <%= f.file_field :photo, as: :file %>
     </div>
+
     <div>
       <%= f.label :category_id %>
       <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }) %>
     </div>
+
+    <div class="field">
+      <%= f.label :images, 'Images' %>
+      <%= f.file_field :images, multiple: true %>
+    </div>
+
     <div>
       <%= f.label :body %>
       <%= f.rich_text_area :body %>
     </div>
+    
     <div>
       <%= f.submit %>
     </div>

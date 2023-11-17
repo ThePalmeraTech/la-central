@@ -17,6 +17,9 @@ class ArticlesController < ApplicationController
     if params[:article][:photo].present?
       @article.photo.attach(params[:article][:photo])
     end
+    if params[:article][:images].present?
+      @article.images.attach(params[:article][:images])
+    end
     if @article.save
 
       redirect_to @article
@@ -48,6 +51,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :category_id, :user_id, :photo)
+    params.require(:article).permit(:title, :body, :category_id, :user_id, :photo, images: [])
   end
 end
